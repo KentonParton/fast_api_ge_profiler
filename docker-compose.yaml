@@ -1,0 +1,17 @@
+version: "3.9"
+services:
+  ge-profiler-test-api:
+    image: ge-profiler-test-api:latest
+    command: [ "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8003", "--reload" ]
+    ports:
+      - "8003:8003"
+    volumes:
+      - $PWD/app/:/code/app/
+    deploy:
+      resources:
+        limits:
+          cpus: "1"
+          memory: "4096M"
+        reservations:
+          cpus: "1"
+          memory: "4096M"
