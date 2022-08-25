@@ -2,9 +2,12 @@ FROM python:3.9
 
 WORKDIR /code
 
-COPY requirements.txt /code/requirements.txt
+COPY poetry.lock pyproject.toml  /code/
 
-RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
+RUN pip install --no-cache-dir --upgrade "poetry==1.1.14"
+
+RUN poetry config virtualenvs.create false \
+    && poetry install --no-interaction --no-ansi
 
 COPY app /code/app
 
